@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import { errorHandler, notFound, requestId } from './middleware/errorHandler.js';
+import { appointmentRoutes } from './modules/appointments/appointment.routes.js';
 import { doctorRoutes } from './modules/doctors/doctor.routes.js';
 import { patientRoutes } from './modules/patients/patient.routes.js';
 
@@ -17,6 +18,7 @@ export function createApp({ clientOrigins }) {
   app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
   app.use('/api/doctors', doctorRoutes);
   app.use('/api/patients', patientRoutes);
+  app.use('/api/appointments', appointmentRoutes);
 
   app.use(notFound);
   app.use(errorHandler);
