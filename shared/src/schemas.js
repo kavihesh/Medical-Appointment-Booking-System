@@ -138,8 +138,10 @@ export const patientSchema = z.strictObject({
     .toUpperCase()
     .min(1, 'NIC number is required')
     .regex(NIC_PATTERN, 'Enter a valid NIC: 9 digits followed by V or X, or 12 digits'),
-  dateOfBirth: z.iso
-    .date('Enter a valid date of birth')
+  dateOfBirth: z
+    .string({ error: 'Date of birth is required' })
+    .min(1, 'Date of birth is required')
+    .pipe(z.iso.date('Enter a valid date of birth'))
     .refine((value) => value <= localToday(), 'Date of birth cannot be in the future')
     .refine((value) => ageInYears(value) <= LIMITS.PATIENT_MAX_AGE, `Age must be ${LIMITS.PATIENT_MAX_AGE} years or less`),
   gender: choice('gender', GENDERS),
