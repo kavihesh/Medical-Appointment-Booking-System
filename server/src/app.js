@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import { errorHandler, notFound, requestId } from './middleware/errorHandler.js';
+import { doctorRoutes } from './modules/doctors/doctor.routes.js';
 
 /** Builds the Express app. Kept separate from server.js so tests can run it without a database. */
 export function createApp({ clientOrigins }) {
@@ -13,6 +14,7 @@ export function createApp({ clientOrigins }) {
   app.use(requestId);
 
   app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
+  app.use('/api/doctors', doctorRoutes);
 
   app.use(notFound);
   app.use(errorHandler);
