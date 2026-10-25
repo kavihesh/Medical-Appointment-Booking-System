@@ -1,0 +1,16 @@
+{
+  "name": "@mab/shared",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Validation schemas and constants shared by the client and the server",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}
